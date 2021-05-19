@@ -1,86 +1,105 @@
+// alert("shit");
+let addNewWEField = ()=>{
+    //clg
+   // console.log("shit");
+    let newNode = document.createElement('textarea');
+    newNode.classList.add('form-control');
+    newNode.classList.add('wefield')
+    newNode.classList.add("mt-2");
+    newNode.setAttribute("placeholder","enter here");
+    newNode.setAttribute("rows",3);
 
+    let weOb = document.getElementById("we");
+    let weAddButtonob = document.getElementById("weAddButton");
 
-let weAdd = ()=>{
-    let newElement = document.createElement("textarea");
-
-    newElement.classList.add("form-control");
-    newElement.classList.add("mt-2");
-    newElement.classList.add("wefield");
-
-    newElement.setAttribute("rows","2");
-    newElement.setAttribute("placeholder","Enter Here");
-
-
-    let id1 = document.getElementById("we");
-    let id2 = document.getElementById("weAddButton");
-
-    id1.insertBefore(newElement,id2)
-
+    weOb.insertBefore(newNode, weAddButtonob);
 }
 
-let aqAdd = ()=>{
-    let newElement = document.createElement("textarea");
+function addnewAQField(){
+    let newNode = document.createElement('textarea');
+    newNode.classList.add('form-control');
+    newNode.classList.add('mt-2')
+    newNode.classList.add('aqfield');
+    newNode.setAttribute("rows",3);
+    newNode.setAttribute("placeholder","enter here");
 
+    let aqOb = document.getElementById("aq");
+    let aqAddButtonOb = document.getElementById("aqAddButton")
 
-    newElement.classList.add("form-control")
-    newElement.classList.add("mt-2")
-    newElement.classList.add("aqfield")
-
-    newElement.setAttribute("placeholder","Enter here")
-
-
-    let id1 = document.getElementById("aq");
-    let id2 = document.getElementById("aqAddButton");
-
-    id1.insertBefore(newElement,id2);
+    aqOb.insertBefore(newNode,aqAddButtonOb);
 }
 
-function generatecv() {
-    let name = document.getElementById("nameT");
-    let name2 = document.getElementById("name2")
-    let getname = document.getElementById("namefield").value;
+//generating cv
+let generateCV = ()=>{
+    let img = document.getElementById("img").files[0];
 
-    name2.innerHTML = getname;
-    name.innerHTML = getname;
+    
 
-    document.getElementById("phoneT").innerHTML = document.getElementById("contactfield").value
+    let reader = new FileReader();
+    reader.readAsDataURL(img)
 
-    document.getElementById("addressT").innerHTML = document.getElementById("addressfield").value
+    reader.onloadend = ()=> {
+        document.getElementById("imgT").setAttribute("src",reader.result);
+    }
+
+    
 
 
-    document.getElementById("fbT").setAttribute("href",document.getElementById("fbfield").value);
-    document.getElementById("ghT").setAttribute("href","https://www.github.com");
-    document.getElementById("liT").setAttribute("href","https://www.linkedin.com");
+    let name = document.getElementById("namefield").value;
+    let nameT = document.getElementById("nameT")
+    let nameT1 = document.getElementById("mainnameT")
 
-    document.getElementById("objectiveT").innerHTML = document.getElementById("obfield").value
+    nameT.innerHTML = name;
+    nameT1.innerHTML = name;
 
-    let str = document.getElementsByClassName("wefield")
+    let contactfield = document.getElementById("contactfield").value;
+    let contactT = document.getElementById("contactT");
+    contactT.innerHTML = contactfield;
+
+    let addressfield = document.getElementById("addressfield").value;
+    let addressT = document.getElementById("addressT");
+    addressT.innerHTML = addressfield;
+
+    let fbfield = document.getElementById("fbfield").value;
+    let fbT = document.getElementById("fbT");
+    fbT.setAttribute("href",fbfield);
+
+    let ghfield = document.getElementById("ghfield").value;
+    let ghT = document.getElementById("ghT");
+    ghT.setAttribute("href",ghfield); 
+
+    //setting objective
+
+    document.getElementById("objectiveT").innerHTML = document.getElementById("objectivefield").value;
+
+    //setting work experience
+
+    let wes = document.getElementsByClassName("wefield");
+    let str='';
+
+    for(let e of wes)
+    {
+        str = str+ `<li>${e.value}</li>`
+    }
+
+    document.getElementById("weT").innerHTML = str;
+
+    //setting aq experience
+
+    let aqs = document.getElementsByClassName("aqfield");
     let str1 = "";
-    //console.log(str);
-    for(let i of str)
+
+    for(let i of aqs)
     {
         str1 += `<li>${i.value}</li>` 
     }
+    document.getElementById("aqT").innerHTML = str1;
 
-    document.getElementById("weT").innerHTML = str1;
+    document.getElementById("cv-form").style.display = "none"
+    document.getElementById("cv-template").setAttribute("style","display:block");
 
-
-    let obj = document.getElementsByClassName("aqfield")
-    let obj1=""
-
-    for(let i of obj)
-    {
-        obj1 += `<li>${i.value}</li>` 
-    }
-
-    document.getElementById("aqT").innerHTML = obj1;
-
-    document.getElementById("cv-form").style = "display:none"
-    document.getElementById("second").style = "display:block"
 }
 
-function printcv()
-{
+let printCV = ()=>{
     window.print();
-    document.getElementById("bo").style = "display:none"
 }
