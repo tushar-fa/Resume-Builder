@@ -1,11 +1,19 @@
-#second{
+/* body{
+    background-color: antiquewhite;
+} */
+
+/* #cv-form{
+    display:none;
+} */
+
+#cv-template{
     display: none;
 }
-.swoo{
-    background-color: aqua;
+.myimg{
+    border-radius: 200px;
+    width:200px;
 }
 
-.image{
-    border-radius: 200px;
-    width: 200px;
+.background{
+    background-color: aqua;
 }
